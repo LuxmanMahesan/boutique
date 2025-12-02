@@ -5,10 +5,36 @@ class Router
     public function chargerPage($page)
     {
         switch ($page) {
+            // Liste articles avec tableau et achat
             case 'articles':
                 require_once __DIR__ . '/../Controllers/ArticleController.php';
                 $c = new ArticleController();
                 $c->listeArticles();
+                break;
+
+            // CRUD complet côté admin/front
+            case 'articles':
+                require_once __DIR__ . '/../Controllers/ArticleController.php';
+                $c = new ArticleController();
+                $c->listeArticles();
+                break;
+
+            case 'ajouter_article':
+                require_once __DIR__ . '/../Controllers/ArticleController.php';
+                $c = new ArticleController();
+                $c->formAjouter();
+                break;
+
+            case 'modifier_article':
+                require_once __DIR__ . '/../Controllers/ArticleController.php';
+                $c = new ArticleController();
+                $c->formModifier();
+                break;
+
+            case 'supprimer_article':
+                require_once __DIR__ . '/../Controllers/ArticleController.php';
+                $c = new ArticleController();
+                $c->supprimer();
                 break;
 
             case 'panier':
@@ -30,6 +56,7 @@ class Router
                 break;
 
             case 'logout':
+                require_once __DIR__ . '/../Core/Session.php';
                 Session::detruire();
                 header("Location: /boutique/public/?page=login");
                 exit;

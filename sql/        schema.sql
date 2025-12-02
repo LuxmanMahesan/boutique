@@ -16,12 +16,15 @@ CREATE TABLE wallet (
 CREATE TABLE articles (
                           id INT AUTO_INCREMENT PRIMARY KEY,
                           nom VARCHAR(100),
-                          montant INT,
+                          categorie VARCHAR(50) DEFAULT 'autre',
+                          montant DECIMAL(10,2),
                           quantite INT,
-                          description TEXT NULL
+                          description TEXT NULL,
+                          date_creation DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO articles (nom, montant, quantite, description) VALUES
-                                                               ('Épée en bois', 150, 10, 'Pour commencer doucement'),
-                                                               ('Potion de soin', 50, 25, NULL),
-                                                               ('Bouclier basique', 300, 5, 'Simple mais utile');
+INSERT INTO articles (nom, categorie, montant, quantite, description) VALUES
+                                                                          ('Épée en bois', 'arme', 150, 10, 'Pour commencer doucement'),
+                                                                          ('Potion de soin', 'potion', 50, 25, NULL),
+                                                                          ('Bouclier basique', 'bouclier', 300, 5, 'Simple mais utile'),
+                                                                          ('Casque de fer', 'armure', 200, 8, 'Protège bien la tête');
