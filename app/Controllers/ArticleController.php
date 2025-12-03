@@ -3,6 +3,7 @@ require_once __DIR__ . '/../Models/Article.php';
 require_once __DIR__ . '/../Models/User.php';
 require_once __DIR__ . '/../Models/Wallet.php';
 require_once __DIR__ . '/../Core/Session.php';
+require_once __DIR__ . '/../Models/Achat.php';
 
 class ArticleController
 {
@@ -40,6 +41,10 @@ class ArticleController
                 else {
                     $this->walletModel->debiter($userId, $article['montant']);
                     $this->articleModel->retraitStock($articleId, 1);
+                    // Après avoir débité le wallet et réduit le stock
+                    $achatModel = new Achat();
+                    $achatModel->creer($userId, $articleId, 1);
+
                     $wallet = $this->walletModel->getWalletByUserId($userId);
                     $message = "Achat effectué avec succès !";
                 }

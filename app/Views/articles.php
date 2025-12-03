@@ -8,6 +8,8 @@
 
 <?php if(!empty($message)) echo "<p style='color:green;'>$message</p>"; ?>
 
+<p><a href="?page=achats">Aller aux achats effectués</a></p>
+
 <div style="margin-bottom:10px;">
     <input type="text" id="rechercheNom" placeholder="Recherche par nom...">
     <input type="text" id="rechercheCategorie" placeholder="Recherche par catégorie...">

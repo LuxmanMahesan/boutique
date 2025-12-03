@@ -12,6 +12,12 @@ class Router
                 $c->listeArticles();
                 break;
 
+            case 'achats':
+                require_once __DIR__ . '/../Controllers/AchatController.php';
+                $c = new AchatController();
+                $c->historique();
+                break;
+
             // CRUD complet côté admin/front
             case 'articles':
                 require_once __DIR__ . '/../Controllers/ArticleController.php';
