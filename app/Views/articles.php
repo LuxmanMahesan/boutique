@@ -10,6 +10,8 @@
 
 <p><a href="?page=achats">Aller aux achats effectués</a></p>
 
+<p><a href="?page=panier    ">Aller au Panier</a></p>
+
 <div style="margin-bottom:10px;">
     <input type="text" id="rechercheNom" placeholder="Recherche par nom...">
     <input type="text" id="rechercheCategorie" placeholder="Recherche par catégorie...">
@@ -85,14 +87,16 @@
             <td><?= htmlspecialchars($a['description']) ?></td>
             <td>
                 <?php if($user): ?>
-                    <form method="post" style="display:inline;">
+                    <form method="post" action="?page=ajouter_au_panier" style="display:inline;">
                         <input type="hidden" name="article_id" value="<?= $a['id'] ?>">
-                        <button type="submit" name="acheter">Acheter</button>
+                        <input type="number" name="quantite" value="1" min="1" style="width:50px">
+                        <button type="submit">Ajouter au panier</button>
                     </form>
                 <?php endif; ?>
                 <a href="?page=modifier_article&id=<?= $a['id'] ?>">Modifier</a> |
                 <a href="?page=supprimer_article&id=<?= $a['id'] ?>" onclick="return confirm('Supprimer ?')">Supprimer</a>
             </td>
+
         </tr>
     <?php endforeach; ?>
     </tbody>
