@@ -28,6 +28,50 @@
     </tr>
     </thead>
     <tbody>
+
+    <?php if($user): ?>
+        <div style="margin-bottom:20px;">
+            <h3>Recharger votre portefeuille</h3>
+            <input type="number" id="montantRecharge" placeholder="Montant à ajouter" min="1">
+            <button id="btnRecharge">Recharger</button>
+            <span id="msgRecharge" style="color:green;"></span>
+        </div>
+    <?php endif; ?>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const btn = document.getElementById("btnRecharge");
+            const input = document.getElementById("montantRecharge");
+            const msg = document.getElementById("msgRecharge");
+
+            btn.addEventListener("click", () => {
+                const montant = parseInt(input.value);
+                if(!montant || montant <= 0) {
+                    msg.textContent = "Montant invalide";
+                    return;
+                }
+
+                fetch("?page=recharge_wallet", {
+                    method: "POST",
+                    headers: {"Content-Type": "application/x-www-form-urlencoded"},
+                    body: "montant=" + montant
+                })
+                    .then(r => r.text())
+                    .then(data => {
+                        msg.textContent = "Portefeuille rechargé de " + montant + " crédits";
+                        // Mettre à jour le solde affiché
+                        const soldeSpan = document.getElementById("solde");
+                        soldeSpan.textContent = parseInt(soldeSpan.textContent) + montant;
+                        input.value = "";
+                    })
+                    .catch(err => {
+                        msg.textContent = "Erreur lors de la recharge";
+                        console.error(err);
+                    });
+            });
+        });
+    </script>
+
     <?php foreach($articles as $a): ?>
         <tr class="article"
             data-nom="<?= strtolower($a['nom']) ?>"

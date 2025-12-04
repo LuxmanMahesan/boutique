@@ -28,4 +28,11 @@ class Wallet
         return $stmt->execute([$montant, $userId]);
     }
 
+
+    public function crediter(int $userId, int $montant)
+    {
+        $stmt = $this->pdo->prepare("UPDATE wallet SET solde = solde + ? WHERE user_id = ?");
+        return $stmt->execute([$montant, $userId]);
+    }
+
 }

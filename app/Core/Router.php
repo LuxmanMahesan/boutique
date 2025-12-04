@@ -67,6 +67,12 @@ class Router
                 header("Location: /boutique/public/?page=login");
                 exit;
 
+            case 'recharge_wallet':
+                require_once __DIR__ . '/../Controllers/ArticleController.php';
+                $controller = new UserController();
+                $controller->recharge();
+                break;
+
             default:
                 echo "Page inconnue.";
         }
